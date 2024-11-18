@@ -27,4 +27,4 @@ CREATE TABLE IF NOT EXISTS student_scores AS(
 			));
 			
 		
-		
+SELECT * FROM main.student_scores;
