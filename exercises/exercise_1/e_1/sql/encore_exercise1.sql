@@ -66,6 +66,20 @@ FROM
 GROUP BY
 	remote_ratio;
 
+-- FILTER clause -> Kokchuns lösning!
+--Here Kokchun is using FILTER clause which
+--provides a concise way to filter rows within aggregate functions.
+SELECT
+	COUNT(*) AS total_jobs,
+	COUNT(*) FILTER (
+WHERE
+	remote_ratio = 100) AS remote_jobs,
+	ROUND(remote_jobs / total_jobs * 100,2) AS percentage_remote_jobs
+FROM
+	main.encore_salaries_cleaned; 
+
+
+
 --g) Pick out a job title of interest and figure out if company size affects the salary. 
 --Make a simple analysis as a comprehensive one requires causality investigations which are much harder to find.
 SELECT company_size, ROUND(AVG(salary_monthly_sek)) AS mean_salary
@@ -79,3 +93,8 @@ SELECT job_title, COUNT(job_title) as num_jobs
 FROM main.encore_salaries_cleaned
 GROUP BY job_title
 ORDER BY num_jobs DESC;
+
+
+--From Kokchuns notes
+-- OFFSET filtering - jumps over 6 top rows
+SELECT * FROM main.encore_salaries_cleaned OFFSET 6;
