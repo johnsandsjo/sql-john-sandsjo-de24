@@ -29,3 +29,17 @@ FROM main.cleaned_food
 GROUP BY year
 HAVING total_searches > 300000
 ORDER BY total_searches DESC;
+
+-- groups by two columns
+SELECT
+	YEAR,
+	food,
+	SUM(number_searches) AS total_searches
+FROM
+	main.cleaned_food
+GROUP BY
+	food,
+	YEAR
+HAVING food = 'pizza'
+ORDER BY YEAR DESC;
+--YEAR = 2015;
