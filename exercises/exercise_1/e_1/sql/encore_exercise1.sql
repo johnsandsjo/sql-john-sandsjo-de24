@@ -76,7 +76,7 @@ WHERE
 	remote_ratio = 100) AS remote_jobs,
 	ROUND(remote_jobs / total_jobs * 100,2) AS percentage_remote_jobs
 FROM
-	main.encore_salaries_cleaned; 
+	main.encore_salaries_cleaned;
 
 
 
