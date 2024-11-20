@@ -11,3 +11,6 @@ FROM
 	); 
 	
 SELECT * FROM main.cleaned_food;
+
+ALTER TABLE main.cleaned_food 
+RENAME COLUMN yearoooo TO year; 
