@@ -36,7 +36,12 @@ FROM main.hemnet;
 --How many unique communes are represented in the dataset.
 SELECT COUNT(DISTINCT commune) FROM main.hemnet;
 --How many percentage of homes cost more than 10 million?
-SELECT ((SELECT COUNT(*) FROM main.hemnet WHERE final_price > 10000000) / COUNT(*))*100 as share_of_homes FROM main.hemnet;
+SELECT
+	(
+	(SELECT COUNT(*) FROM main.hemnet WHERE final_price > 10000000) 
+	/ COUNT(*))* 100 AS share_of_homes
+FROM
+	main.hemnet;
 
 --Feel free to explore anything else you find interesting in this dataset.
 SELECT address, final_price, rooms, ROUND(final_price/rooms) as price_per_room FROM main.hemnet ORDER BY price_per_room DESC;
