@@ -23,7 +23,7 @@ SELECT * EXCLUDE(sale_date) FROM synthetic.sales_jan
 INTERSECT
 SELECT * EXCLUDE(sale_date) FROM synthetic.sales_feb;
 
---Except
+--Except Everithing that is in A, but remove everything that also is in B
 SELECT product_name, amount FROM synthetic.sales_jan
 EXCEPT
 SELECT product_name, amount FROM synthetic.sales_feb;
