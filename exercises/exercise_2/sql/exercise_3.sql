@@ -68,3 +68,21 @@ WHERE first_name LIKE 'J%' AND last_name LIKE 'D%';
 
 
 --f) What else cool information can you find out with this database using what you know about SQL.
+
+
+--Highest revenue in one day per store
+--max_daily_revenue
+SELECT
+	DATE_TRUNC('day', payment_date) AS date,
+	i.store_id,
+    SUM(amount) AS sum
+FROM 
+    main.payment p 
+LEFT JOIN main.rental r 
+ON p.rental_id = r.rental_id
+LEFT JOIN main.inventory i
+ON r.inventory_id = i.inventory_id
+GROUP BY 
+	date, i.store_id
+ORDER BY
+	sum DESC;

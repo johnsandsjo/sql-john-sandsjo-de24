@@ -32,8 +32,7 @@ FROM
 SELECT
 	'customer_' || order_id AS customer_name,
 	DATE '2024-01-01' + (order_id-1) * INTERVAL '1 day' AS order_date,
-	ROUND(RANDOM() * 1000,
-	2) AS order_amount,
+	ROUND(RANDOM() * 1000,2) AS order_amount,
 	CASE
 		WHEN RANDOM() < 0.7 THEN 'completed'
 		WHEN RANDOM() < 0.9 THEN 'pending'
