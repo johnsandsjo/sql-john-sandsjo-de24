@@ -8,11 +8,17 @@ DESC TABLE main.film_text;
 DESC TABLE main.rental;
 DESC TABLE main.category;
 DESC TABLE main.film_list;
+DESC TABLE main.customer;
+DESC TABLE main.customer_list;
+DESC TABLE main.inventory;
 SELECT * FROM main.film f;
 SELECT * FROM main.film_list fl;
 SELECT * FROM main.rental r;
 SELECT * FROM main.customer c ;
-SELECT * FROM main.customer_list cl ;
+SELECT * FROM main.customer_list cl;
+SELECT * FROM main.inventory;
+SELECT * FROM main.payment p;
+
 
 
 --b) Select all data on all tables.
@@ -103,7 +109,6 @@ GROUP BY rating
 ORDER BY num_of_films;
 
 
-
 --g) Who are the top 10 customers by number of rentals?
 SELECT 
 	cl.name, 
@@ -112,8 +117,21 @@ FROM main.rental r
 LEFT JOIN main.customer_list cl 
 ON r.customer_id = cl.ID 
 GROUP BY cl.name
-ORDER BY num_of_rentals DESC;
+ORDER BY num_of_rentals DESC
+LIMIT 10;
 
 --h) Retrieve a list of all customers and what films they have rented.
+SELECT 
+	r.customer_id,
+	cl.name,
+	f.title 
+FROM main.rental r
+LEFT JOIN main.customer_list cl
+ON r.customer_id = cl.id
+LEFT JOIN main.inventory i 
+ON r.inventory_id = i.inventory_id
+LEFT JOIN main.film f 
+ON f.film_id = i.film_id
+ORDER BY customer_id;
 
 --i) Make a more extensive EDA of your choice on the Sakila database.
