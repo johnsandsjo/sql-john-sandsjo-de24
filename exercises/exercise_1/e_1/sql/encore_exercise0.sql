@@ -86,6 +86,9 @@ FROM main.encore_salaries;
  --f) Choose the following columns to include in your table: 
  --experience_level, employment_type, job_title, salary_annual_sek, salary_monthly_sek, 
  --remote_ratio, company_size, salary_level
+
+--CREATE OR REPLACE TABLE encore_salaries_cleaned AS (...)
+
 CREATE TABLE IF NOT EXISTS encore_salaries_cleaned AS(
 SELECT
 	CASE 
@@ -120,3 +123,4 @@ FROM main.encore_salaries);
 SELECT * FROM main.encore_salaries_cleaned;
 
 SUMMARIZE main.encore_salaries_cleaned;
+
