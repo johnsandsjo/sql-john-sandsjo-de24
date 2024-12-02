@@ -118,3 +118,5 @@ SELECT
 FROM main.encore_salaries);
 
 SELECT * FROM main.encore_salaries_cleaned;
+
+SUMMARIZE main.encore_salaries_cleaned;
