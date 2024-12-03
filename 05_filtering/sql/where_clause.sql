@@ -36,3 +36,7 @@ FROM
 	WHERE job_title in('Data Product Manager','Product Manager', 'Data Engineer')
 	GROUP BY job_title
 	ORDER BY median_salary_monthly_sek DESC;
+	
+
+DESC;
+SELECT * FROM staging.data_jobs;
