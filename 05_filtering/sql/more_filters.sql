@@ -23,3 +23,11 @@ FROM
 	
 --OFFSET skips the rows
 SELECT * FROM main.DATA_JOBS dj OFFSET 6;
+
+
+
+SELECT
+	COUNT(*) as total_jobs,
+	COUNT(*) FILTER (WHERE remote_ratio=100) AS remote_jobs
+FROM
+	main.DATA_JOBS;
