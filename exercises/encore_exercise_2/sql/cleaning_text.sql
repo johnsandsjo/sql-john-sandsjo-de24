@@ -27,7 +27,7 @@ FROM (VALUES
 	(1, 'Liz', 'Hurley'),
 	(2, 'Leo', 'Vegas'), 
 	(3, 'Bo', 'Yeltzin'), 
-	(4, 'Mona', 'Lisa')) AS dum_dum(id, first_name, last_name)
+	(4, 'Mona', 'Lisa')) AS t(id, first_name, last_name)
 );
 
 CREATE TABLE IF NOT EXISTS refined_3.dummy2 AS (
