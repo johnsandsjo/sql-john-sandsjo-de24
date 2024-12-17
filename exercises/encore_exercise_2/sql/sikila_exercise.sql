@@ -174,7 +174,32 @@ ORDER BY category_rank;
 
 
 --Calculate the running total of rental revenue over time.
+WITH cleaned_date AS(
+SELECT strftime(rental_date, '%Y-%m-%d')
+FROM (SELECT rental_date FROM main.rental)
+--Here above I cleaned from timestamp
+--below I should try the window function without the timestamp using update table etc.
 
+)
+SELECT 
+	rental_date, 
+	SUM(amount) as daily_revenue
+FROM cleaned_date
+LEFT JOIN main.film_list fl
+ON cleaned_date.rental_date = r.rental_date
+LEFT JOIN main.rental r 
+ON fl.FID = r.inventory_id
+LEFT JOIN main.payment p
+ON p.rental_id = r.rental_id
+GROUP BY rental_date)
+SELECT
+	rental_date,
+	daily_revenue,
+	SUM(daily_revenue) OVER(ORDER BY rental_date) AS running_total
+FROM 
+	RentalRevenue
+ORDER BY 
+rental_date;
 --Common Table Expressions (CTEs):
 --Use CTEs to find the top 5 customers who have rented the most expensive films in a single query.
 --Calculate the average rental duration for each film category, using CTEs to break down the calculations into smaller steps.

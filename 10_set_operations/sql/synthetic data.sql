@@ -50,3 +50,46 @@ INSERT INTO synthetic.products VALUES
 SELECT * FROM synthetic.sales_jan;
 
 SELECT * FROM synthetic.sales_feb; 
+
+SELECT * FROM information_schema.tables;
+
+SELECT * FROM synthetic.products;
+DROP TABLE synthetic.products;
+
+
+
+CREATE TABLE IF NOT EXISTS synthetic.products AS (
+SELECT * FROM
+ (VALUES
+		('Monitor', 'Electronics', 'TechCorp', 300.00),
+		('Keyboard', 'Accessories', 'InpuMasters', 100.00),
+		('Mouse', 'Accessories', 'InpuMasters', 50.00),
+		('Laptop', 'Electronics', 'GigaTech', 1000.00),
+		('Headphones', 'Audio', 'SoundPro', 150.00)) AS t(product_name, category, supplier, price));
+	
+CREATE TABLE IF NOT EXISTS synthetic.sales AS (
+SELECT * FROM
+ (VALUES
+		(2, 2, '2024-02-11', 5, 500.00),
+		(4, 4, '2024-02-20', 1, 1000.00),
+		(5, 5, '2024-02-21', 4, 600.00)) AS t(sale_id, product_id, sale_date, quantity, total_amount));
+
+	
+CREATE TABLE IF NOT EXISTS synthetic.product_thre AS (
+SELECT
+	ROW_NUMBER() OVER () AS product_id,
+	product_name, 
+	category, 
+	supplier, 
+	price
+FROM synthetic.products);
+
+SELECT 
+	p.product_name,
+	p.category,
+	p.supplier,
+	s.total_amount
+FROM synthetic.product_two p
+RIGHT JOIN synthetic.sales s
+ON p.product_id = s.product_id
+

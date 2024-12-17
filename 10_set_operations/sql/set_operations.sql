@@ -27,3 +27,14 @@ SELECT * EXCLUDE(sale_date) FROM synthetic.sales_feb;
 SELECT product_name, amount FROM synthetic.sales_jan
 EXCEPT
 SELECT product_name, amount FROM synthetic.sales_feb;
+
+
+CREATE TABLE IF NOT EXISTS sales AS(
+VALUES()
+)
+
+CREATE TABLE IF NOT EXISTS database.sql (
+		id INTEGER DEFAULT nextval('id_sql_sequence'),
+		word STRING,
+		description STRING
+	);

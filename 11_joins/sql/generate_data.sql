@@ -29,3 +29,6 @@ VALUES
 	(3, 4, 'Biweekly', 'Full Sun'),
 	(4, 6, 'Daily', 'Shade');
 
+SELECT *
+FROM main.plants p
+RIGHT JOIN main.plant_care pc ON p.plant_id = pc.plant_id;

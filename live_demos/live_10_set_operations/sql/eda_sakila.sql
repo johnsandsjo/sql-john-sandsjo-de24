@@ -26,3 +26,12 @@ SELECT 'ACTOR' AS type, a.first_name, a.last_name FROM main.actor a WHERE a.firs
 SELECT c.first_name, c.last_name FROM main.customer c
 INTERSECT
 SELECT a.first_name, a.last_name FROM main.actor a;
+
+
+SELECT da(payment_date) FROM main.payment p 
+
+SELECT timestamp(payment_date) FROM main.payment p;
+
+EXTRACT(MINUTE, FROM );
+
+

@@ -86,3 +86,15 @@ GROUP BY
 	date, i.store_id
 ORDER BY
 	sum DESC;
+	
+SELECT * FROM main.customer_list cl ;
+
+--SELF JOINS
+SELECT A.name AS customerA, B.name AS customerB, A.city
+FROM main.customer_list A, main.customer_list B
+WHERE A.id <> B.id AND A.city=B.city;
+
+SELECT A.name AS customerA, B.name AS customerB, A.city
+FROM main.customer_list A
+INNER JOIN main.customer_list B 
+ON A.id <> B.id AND A.city=B.city;

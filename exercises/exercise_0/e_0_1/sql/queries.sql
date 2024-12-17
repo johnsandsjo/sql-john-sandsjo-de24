@@ -86,3 +86,22 @@ WHERE
 GROUP BY 
     commune
 ORDER BY avg_price_per_area DESC;
+
+
+
+
+
+-- How many percentage of homes cost more than 10 million?
+
+SELECT 
+(SELECT COUNT(*) FROM main.hemnet h WHERE final_price > 10000000)/COUNT(*)*100 AS percent
+FROM main.hemnet h 
+
+
+--Find out statistics on minimum, mean, median and maximum prices of price per area.
+SELECT 
+	ROUND(MIN(final_price/area)) AS price_per_m2_min,
+	ROUND(MAX(final_price/area)) AS price_per_m2_max,
+	ROUND(AVG(final_price/area)) AS price_per_m2_avg,
+	ROUND(MEDIAN(final_price/area)) AS price_per_m2_median
+FROM main.hemnet;

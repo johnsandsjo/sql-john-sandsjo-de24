@@ -57,3 +57,53 @@ FROM
 
 
  
+ 
+ 
+ --f) How many percentage of the jobs are fully remote, 50 percent remote and fully not remote.
+SELECT
+	remote_ratio,
+	count(*) as num_jobs,
+	round(count(*) / (SELECT COUNT(*) FROM main.cleaned_salaries cs)*100,2) as percent_of_jobs
+FROM main.cleaned_salaries
+GROUP BY remote_ratio
+
+
+
+
+CREATE TABLE IF NOT EXISTS main.cleaned_salaries3 AS (
+SELECT 
+	experience_level,
+	CASE 
+	WHEN employment_type = 'FT' THEN 'Full Time'
+	WHEN employment_type = 'CT' THEN 'Contract'
+	WHEN employment_type = 'PT' THEN 'Part Time'
+	WHEN employment_type = 'FL' THEN 'Freelance'
+	ELSE employment_type 
+	END as employment_type,
+	job_title,
+	salary_in_usd* 10.92 as salary_annual_sek,
+	(salary_in_usd* 10.92/12) as salary_monthly_se,
+	remote_ratio,
+	CASE 
+	WHEN company_size = 'M' THEN 'Medium'
+	WHEN company_size = 'S' THEN 'Small'
+	WHEN company_size = 'PT' THEN 'Large'
+	ELSE company_size 
+	END as company_size,
+	CASE 
+		WHEN salary_monthly_se < 60000 THEN 'low'
+		WHEN salary_monthly_se < 80000 THEN 'medium'
+		WHEN salary_monthly_se < 110000 THEN 'high'
+		WHEN salary_monthly_se > 110000 THEN 'insanely_high'
+	END AS salary_level
+FROM cleaned_salaries_2);
+ 
+
+SELECT * FROM cleaned_salaries3;
+
+SELECT 
+	remote_ratio,
+	COUNT(*) as num_jobs,
+	ROUND(num_jobs/(SELECT COUNT(*) FROM main.cleaned_salaries3)*100,2) AS num_jobs_percent
+FROM main.cleaned_salaries3
+GROUP BY remote_ratio;
